@@ -16,7 +16,7 @@ func main() {
 	a := setIntSlice(n)
 
 	//Search
-	min_value : = inf
+	min_value := inf
 	for i := 0; i < n; i++ {
 		if a[i] < min_value {
 			min_value = a[i]
