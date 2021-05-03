@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func Fibonacci(N int) int {
 	//base case
 	if N == 0 {
@@ -13,4 +15,6 @@ func Fibonacci(N int) int {
 
 }
 
-func main() {}
+func main() {
+	fmt.Print(6, "->", Fibonacci(6))
+}
