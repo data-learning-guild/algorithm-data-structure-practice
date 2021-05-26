@@ -13,19 +13,14 @@ func SubsetDP(number_list []int, target_num int) bool {
 
 	for i := 0; i < n; i++ {
 		for j := 0; j <= target_num; j++ {
-			if !dp_memo[i][j] {
-				continue
-			}
-			// change the steps for moving next
-			// dp_memo[i+1][j] = true
-			// if j+number_list[i] <= target_num {
-			// 	dp_memo[i+1][j+number_list[i]] = true
+			// if !dp_memo[i][j] {
+			// 	continue
 			// }
 			if dp_memo[i][j] {
-				dp_memo[i+1][j] == true // use again
+				dp_memo[i+1][j] = true // 1. same as last i
 			}
-			if dp_memo[i+1][j] && j+number_list[i] <= target_num {
-				dp_memo[i+1][j+number_list[i]] = true // use next num
+			if dp_memo[i+1][j] && j+number_list[i] <= target_num { // 2. the number of (base-number + next-number)  is less then the target number
+				dp_memo[i+1][j+number_list[i]] = true
 			}
 		}
 	}
@@ -34,7 +29,7 @@ func SubsetDP(number_list []int, target_num int) bool {
 }
 
 func main() {
-	a := []int{3, 1}
-	result := SubsetDP(a, 5)
+	a := []int{5, 3, 4}
+	result := SubsetDP(a, 29)
 	fmt.Println(result)
 }
