@@ -27,7 +27,7 @@ func SubsetDP(number_list []int, target_num int) bool {
 }
 
 func main() {
-	a := []int{3, 1}
-	result := SubsetDP(a, 5)
+	a := []int{1, 3, 4}
+	result := SubsetDP(a, 7)
 	fmt.Println(result)
 }
