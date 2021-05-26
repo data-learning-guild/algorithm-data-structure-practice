@@ -62,14 +62,6 @@ int main() {
     }
   }
 
-  // 途中経過の確認用
-  for (int i = 0; i <= n; i++) {
-    for (int j = 0; j < 3; j++) {
-      cout << dp[i][j] << endl;
-    }
-    cout << "---" << endl;
-  };
-
   // 最終日までの合計の最大値
   cout << *max_element(dp[n].begin(), dp[n].end()) << endl;
   // ライブラリalgorithmに頼らない場合
