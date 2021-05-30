@@ -1,3 +1,7 @@
+package lowerbound
+
+import "testing"
+
 func TestLowerBound(t *testing.T) {
 	type args struct {
 		array  []int

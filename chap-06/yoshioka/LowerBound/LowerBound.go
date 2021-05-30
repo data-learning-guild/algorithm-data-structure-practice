@@ -1,6 +1,7 @@
 package lowerbound
 
 // LowerBound ...
+// https://gist.github.com/olee12/928b602d85afec4d8d991e2938e74d11
 func LowerBound(array []int, target int) int {
 	low, high, mid := 0, len(array)-1, 0
 	for low <= high {
