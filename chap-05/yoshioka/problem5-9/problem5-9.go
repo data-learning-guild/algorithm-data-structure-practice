@@ -29,25 +29,25 @@ func BinarySearchTree(size_list []int) int {
 
 	//start updating
 	// not works
-	// for j := 2; j <= length; j++ {
-	// 	for i := 0; i+1 <= j; i++ {
+	for j := 2; j <= length; j++ {
+		for i := 0; i+1 < j; i++ {
 
-	// 		for k := i + 1; k < j; k++ {
-	// 			chmin(&dp_memo[i][j], dp_memo[i][k]+dp_memo[k][j]+(cum_sum[j]-cum_sum[i]))
-	// 		}
-
-	// 	}
-	// }
-
-	// answer
-	for bet := 2; bet <= length; bet++ {
-		for i := 0; i+bet <= length; i++ {
-			j := i + bet
 			for k := i + 1; k < j; k++ {
 				chmin(&dp_memo[i][j], dp_memo[i][k]+dp_memo[k][j]+(cum_sum[j]-cum_sum[i]))
 			}
+
 		}
 	}
+
+	// answer
+	// for bet := 2; bet <= length; bet++ {
+	// 	for i := 0; i+bet <= length; i++ {
+	// 		j := i + bet
+	// 		for k := i + 1; k < j; k++ {
+	// 			chmin(&dp_memo[i][j], dp_memo[i][k]+dp_memo[k][j]+(cum_sum[j]-cum_sum[i]))
+	// 		}
+	// 	}
+	// }
 
 	return dp_memo[0][length]
 }
