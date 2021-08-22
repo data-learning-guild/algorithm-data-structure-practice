@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./../queue"
+	"../queue"
 )
 
 type Graph [][]int
@@ -16,25 +16,25 @@ func bfs(g *Graph, s int) bool {
 	for i := 0; i < n; i++ {
 		dist[i] = -1
 	}
-	que := make(queue.IntQueue, 0)
+	var que queue.IntQueue
 
-	color[0] = 0
-	cur := color[0]
-	que.Enqueue(0)
+	color[s] = 0
+	que.Enqueue(s)
 
 	for len(que) > 0 {
 		v := que.Dequeue()
+		cur := color[v]
 
 		for _, x := range (*g)[v] {
 			if color[x] != -1 {
 				if color[x] == cur {
 					return false
 				}
-
 				continue
 			}
 
-			color[x] = 1 - dist[v]
+			cur = 1 - color[v]
+			color[x] = cur
 			que.Enqueue(x)
 		}
 
