@@ -3,70 +3,65 @@ package main
 import (
 	"fmt"
 
-	"./../queue"
+	"../queue"
 )
 
-type Graph [][]int
+type DiGraph [][]int
 
-var color []int
+var order []int
+var deg []int
 
-func bfs(g *Graph, s int) bool {
-	n := len(*g)
-	dist := make([]int, n)
-	for i := 0; i < n; i++ {
-		dist[i] = -1
+func BFS(g *DiGraph) {
+	//ini
+	var que queue.IntQueue
+	for i := 0; i < len(*g); i++ {
+		if deg[i] == 0 {
+			que.Enqueue(i)
+		}
 	}
-	que := make(queue.IntQueue, 0)
 
-	color[0] = 0
-	cur := color[0]
-	que.Enqueue(0)
-
+	//while que is empty
 	for len(que) > 0 {
 		v := que.Dequeue()
+		order = append(order, v)
 
-		for _, x := range (*g)[v] {
-			if color[x] != -1 {
-				if color[x] == cur {
-					return false
-				}
+		for _, x := range (*g)[v] { //TODO change to rev
+			deg[x]--
 
-				continue
+			if deg[x] == 0 {
+				que.Enqueue(x)
 			}
-
-			color[x] = 1 - dist[v]
-			que.Enqueue(x)
 		}
-
 	}
-	return true
 
 }
 
 func main() {
-	n := 5
+	n := 8
 
-	g := make(Graph, n)
-	g[0] = []int{1, 3}
-	g[1] = []int{0, 2, 4}
-	g[2] = []int{1}
-	g[3] = []int{0, 4}
-	g[4] = []int{1, 3}
+	g := make(DiGraph, n)
+	g[0] = []int{5}
+	g[1] = []int{6, 3}
+	g[2] = []int{5, 7}
+	g[3] = []int{0, 7}
+	g[4] = []int{1, 6, 2}
+	g[5] = []int{}
+	g[6] = []int{7}
+	g[7] = []int{0}
 
-	color = make([]int, n)
+	// seen = make([]bool, n)
+	order = make([]int, 0)
+
+	deg = make([]int, n)
 	for i := 0; i < n; i++ {
-		color[i] = -1
-	}
-
-	result := true
-	for v := 0; v < n; v++ {
-		if color[v] != -1 {
-			continue
-		}
-		if !dfs(&g, v, 0) {
-			result = false
+		for _, e := range g[i] {
+			deg[e]++
 		}
 	}
 
-	fmt.Println("result:", result)
+	BFS(&g)
+
+	for _, o := range order {
+		fmt.Println("->", o)
+	}
 }
