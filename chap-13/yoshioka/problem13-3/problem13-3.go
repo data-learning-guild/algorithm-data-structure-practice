@@ -63,7 +63,7 @@ func main() {
 		if color[v] != -1 {
 			continue
 		}
-		if !dfs(&g, v, 0) {
+		if !bfs(&g, v) {
 			result = false
 		}
 	}
