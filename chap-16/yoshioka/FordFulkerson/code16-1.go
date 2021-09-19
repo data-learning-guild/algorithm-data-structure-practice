@@ -1,4 +1,4 @@
-package main
+package FordFulkerson
 
 import (
 	"fmt"
@@ -27,7 +27,7 @@ func (g *Graph) run_flow(e *Edge, f int){
     g.redge(e).cap += f
 }
 
-func (g *Graph) add_edge(from, to, cap int){
+func (g *Graph) Add_edge(from, to, cap int){
     fromrev := len((*g)[from])
     torev := len((*g)[to])
 
@@ -56,7 +56,7 @@ func (ff FordFulkerson) fodfs(g *Graph, v, t, f int) int{
             continue 
         }
 
-        flow := ff.fodfs(g, e.to, t, min(f, e.cap))
+        flow := ff.fodfs(g, e.to, t, IntMin(f, e.cap))
 
         if flow==0 {
             continue
@@ -69,12 +69,12 @@ func (ff FordFulkerson) fodfs(g *Graph, v, t, f int) int{
     return 0
 }
 
-func (ff FordFulkerson)solve(g *Graph, s, t int)int{
+func (ff FordFulkerson)Solve(g *Graph, s, t int)int{
     var res int
 
     for {
         ff.seen = make([]bool, (*g).size())
-        flow := ff.fodfs(g, s,t,_inf)
+        flow := ff.fodfs(g, s,t,Inf)
 
         if flow ==0 {
             return res
@@ -85,7 +85,7 @@ func (ff FordFulkerson)solve(g *Graph, s, t int)int{
     return 0
 }
 
-func min(a, b int) int{
+func IntMin(a, b int) int{
     if a < b {
         return a
     } else{
@@ -93,7 +93,7 @@ func min(a, b int) int{
     }
 }
 
-const _inf = math.MaxInt32
+const Inf = math.MaxInt32
 
 func main(){
     n := 6
@@ -115,13 +115,13 @@ func main(){
 
     for _,e := range input{
         u, v, c := e[0], e[1], e[2]
-        g.add_edge(u,v,c)
+        g.Add_edge(u,v,c)
     }
 
     ff := FordFulkerson{}
     s := 0
     t := n-1
-    r := ff.solve(&g, s,t)
+    r := ff.Solve(&g, s,t)
     fmt.Println(r)
  
 }
